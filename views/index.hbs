@@ -1,0 +1,216 @@
+<div class="container">
+      <div class="blockquote text-center">
+            <h1>Μεταφέρουμε ότι χρειάζεσαι μέσα στην πόλη άμμεσα</h1>
+      </div>
+
+      <div class="col-lg-6 offset-lg-3 col-md-12">
+            <form action="/courier" method="post" id="formCourier" onkeypress="return event.keyCode != 13;">
+            <label for="origin">Απο πού θες να παραλάβουμε;</label>
+      
+            <div class="input-group mb-3">   
+                  {{#if session.origin}}
+                  <input id="origin" name="origin" value="{{session.origin.name}}" placeholder="π.χ. το όνομα του καταστήματος ή την διεύθυνση παραλαβής" type="text" class="form-control" onfocus="geolocate()"> 
+                  <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" id="detailButtonOrigin"  type="button" data-toggle="modal" data-target="#modalOrigin">Λεπτομέριες</button>
+                  </div>
+                  {{else}}                           
+                  <input id="origin" name="origin" placeholder="π.χ. το όνομα του καταστήματος ή την διεύθυνση παραλαβής" type="text" class="form-control" onfocus="geolocate()">
+                  {{/if}}
+            </div>
+            <label for="destination">Που θέλεις να στο φέρουμε</label>
+            <div class="input-group mb-3">
+                  {{#if session.destination}}
+                  <input id="destination" placeholder="π.χ. διεύθυνση" value="{{session.destination.name}}" type="text" class="form-control" onfocus="geolocate()">
+                  <div class="input-group-append">      
+                        <button class="btn btn-outline-secondary"  id="detailButtonDestination" type="button" data-toggle="modal" data-target="#modalDestination">Λεπτομέριες</button>
+                  </div>
+                  {{else}}
+                  <input id="destination" placeholder="π.χ. διεύθυνση" type="text" class="form-control" onfocus="geolocate()">
+                  {{/if}}
+            </div>
+      
+            <div class="form-group">
+                  <label for="itemBuy">Αν θέλεις να αγοράσουμε κάτι για σένα περιέγραψέ το εδώ.</label>
+                  <input class="form-control" id="itemBuy" name="itemBuy" type="text" placeholder="Αν έχεις και κάποιο link θα είναι καλύτερα">
+            </div>            
+            <div class="form-group">  
+                  <input class="form-control" id="itemPrice" name="itemPrice" type="text" placeholder="Πόσο κοστίζει;">
+            </div>   
+            <div class="form-group">    
+                  <div class="row  justify-content-center">
+                        <div class="col-6">
+                              <p>Είναι αυτό που θες να στείλεις μεγαλύτερο απο ένα laptop;</p>
+                        </div>
+                        <div class="col-4">   
+                              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active">
+                                          <input type="radio" name="weight" id="true" autocomplete="off" checked> Ναι
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                          <input type="radio" name="weight" id="false" autocomplete="off"> Όχι
+                                    </label>
+                              </div>
+                        </div>          
+                  </div>
+            </div>  
+            <div class="row  justify-content-center">
+                  <div class="col-6">
+                        <div id="output"></div>
+                  </div>
+                  <div class="col-4">
+      
+                  </div>
+            </div>
+       <button type="submit" class="btn btn-primary">Αποδοχή</button>
+      </form>
+      </div>       
+</div>
+ {{!-- modal for origin start --}}
+            <div class="modal fade" id="modalOrigin" role="dialog" tabindex="-1">
+                  <div class="modal-dialog">
+                        <div class="modal-content">
+                              <form action="/origin" method="post" id="needs-validation-origin" novalidate>
+                              <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Διεύθυνση Παραλαβής</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                              </div>
+                              <button class="btn btn-primary" type="submit">Αποθήκευση</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Κλείσιμο</button>
+                              <div class="modal-body">
+                                    <label for="nameOrigin">Όνομα</label>
+                                    <div class="input-group">
+                                          <input class="form-control" id="nameOrigin" name="nameOrigin" value="{{session.origin.name}}" type="text" required>
+                                          <div class="invalid-feedback">
+                                                Συμπλήρωσε το όνομα το καταστήματος ή του αποστολέα.
+                                          </div>
+                                    </div>
+                                    <div class="row">
+                                          <div class="col">
+                                                <label for="routeOrigin">Οδός</label>
+                                                <div class="input-group">
+                                                      <input class="form-control" id="routeOrigin" name="routeOrigin"type="text" value="{{session.origin.route}}" required>
+                                                      <div class="invalid-feedback">
+                                                            Συμπλήρωσε την οδό.
+                                                      </div>                   
+                                                </div>                 
+                                          </div>
+                                          <div class="col">
+                                                <label for="street_numberOrigin">Αριθμός</label>
+                                                <div class="input-group">
+                                                      <input class="form-control" id="street_numberOrigin" name="street_numberOr2igin" type="text" value="{{session.origin.streetNumber}}" required>
+                                                      <div class="invalid-feedback">
+                                                            Συμπληρωσε τον αριθμό.
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="row">
+                                          <div class="col">
+                                                <label for="localityOrigin">Πόλη</label>
+                                                <div class="input-group">
+                                                      <input class="form-control" id="localityOrigin" name="localityOrigin" type="text" value="{{session.origin.locality}}" required>
+                                                      <div class="invalid-feedback">
+                                                            Συμπλήρωσε την πόλη.
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          <div class="col">
+                                                <label for="postal_codeOrigin">ΤΚ</label>
+                                                <input class="form-control" id="postal_codeOrigin" name="postal_codeOrigin" type="text" value="{{session.origin.postalCode}}">
+                                          </div>
+                                    </div>
+                                    <label for="phoneOrigin">Τηλέφωνο</label>
+                                    <div class="input-group">
+                                          <input class="form-control" id="phoneOrigin" name="phoneOrigin" type="text" value="{{session.origin.phone}}" required>
+                                          <div class="invalid-feedback">
+                                                Συμπλήρωσε το τηλέφωνο.
+                                          </div>
+                                    </div>      
+                                    <div class="form-group">
+                                          <label for="textOrigin">Σχόλια</label>
+                                          <textarea class="form-control" id="textOrigin" rows="3" name="textOrigin" placeholder="Όροφος, Κουδούνι κ.α.">{{session.origin.text}}</textarea>
+                                    </div>
+                              </div>
+                              </form>
+                        </div>
+                  </div>
+            </div>     
+            {{!-- modal for origin finish        --}}
+            {{!-- modal για destination start --}}
+            <div class="modal fade" id="modalDestination" role="dialog" tabindex="-1">
+                  <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                              <form action="/destination" method="post" id="needs-validation-destination" novalidate>
+                              <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Διεύθυνση Παράδοσης</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                              </div>
+                              <button class="btn btn-primary" type="submit" onclick="distance">Αποθήκευση</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Κλείσιμο</button>
+                              <div class="modal-body">
+                                    <label for="nameDestination">Όνομα</label>
+                                    <div class="input-group">
+                                          <input class="form-control" id="nameDestination" name="nameDestination" value="{{session.destination.name}}" type="text" required>
+                                          <div class="invalid-feedback">
+                                                Συμπλήρωσε το όνομα του παραλήπτη.
+                                          </div>
+                                    </div>
+                                    <div class="row">
+                                          <div class="col">
+                                                <label for="routeDestination">Οδός</label>
+                                                <div class="input-group">
+                                                      <input class="form-control" id="routeDestination" name="routeDestination" type="text" value="{{session.destination.route}}" required>
+                                                      <div class="invalid-feedback">
+                                                            Συμπλήρωσε την οδό.
+                                                      </div>                   
+                                                </div>                 
+                                          </div>
+                                          <div class="col">
+                                                <label for="street_numberDestination">Αριθμός</label>
+                                                <div class="input-group">
+                                                      <input class="form-control" id="street_numberDestination" name="street_numberDestination" type="text" value="{{session.destination.streetNumber}}" required>
+                                                      <div class="invalid-feedback">
+                                                            Συμπληρωσε τον αριθμό.
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="row">
+                                          <div class="col">
+                                                <label for="localityDestination">Πόλη</label>
+                                                <div class="input-group">
+                                                      <input class="form-control" id="localityDestination" name="localityDestination" type="text" value="{{session.destination.locality}}" required>
+                                                      <div class="invalid-feedback">
+                                                            Συμπλήρωσε την πόλη.
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          <div class="col">
+                                                <label for="postal_codeDestination">ΤΚ</label>
+                                                <input class="form-control" id="postal_codeDestination" name="postal_codeDestination" type="text" value="{{session.destination.postalCode}}">
+                                          </div>
+                                    </div>
+                                    <label for="phoneDestination">Τηλέφωνο</label>
+                                    <div class="input-group">
+                                          <input class="form-control" id="phoneDestination" name="phoneDestination" type="text" value="{{session.destination.phone}}" required>
+                                          <div class="invalid-feedback">
+                                                Συμπλήρωσε το τηλέφωνο.
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                          <label for="textDestination">Σχόλια</label>
+                                          <textarea class="form-control" id="textDestination" rows="3" name="textDestination" placeholder="Όροφος, Κουδούνι κ.α.">{{session.destination.text}}</textarea>
+                                    </div>
+                              </div>
+                              {{!-- </form> --}}
+                              </div>
+                        </div>
+                  </div>
+                  {{!-- modal για destination finish --}}
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDfSWT2soGD9bHWIFUobyndIa2YI1MVBmY&libraries=places"></script>
+<script src="/javascripts/autocomplete.js"></script>
