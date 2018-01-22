@@ -32,7 +32,7 @@ var app = express();
 // db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-mongoose.connect('mongodb://hurrybox¨'+ process.env.MONGO_ATLAS_PSW +'@cluster0-shard-00-00-qte2y.mongodb.net:27017,cluster0-shard-00-01-qte2y.mongodb.net:27017,cluster0-shard-00-02-qte2y.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', {
+mongoose.connect('mongodb://hurrybox:1q2w3e$R@cluster0-shard-00-00-qte2y.mongodb.net:27017,cluster0-shard-00-01-qte2y.mongodb.net:27017,cluster0-shard-00-02-qte2y.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', {
     useMongoClient: true
 });
 mongoose.Promise = global.Promise; 
