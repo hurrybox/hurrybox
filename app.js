@@ -22,19 +22,20 @@ var drivers = require('./routes/drivers');
 
 var app = express();
 
-mongoose.connect('mongodb://127.0.0.1/hurrybox');
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-//Get the default connection
-var db = mongoose.connection;
+// mongoose.connect('mongodb://127.0.0.1/hurrybox');
+// // Get Mongoose to use the global promise library
+// mongoose.Promise = global.Promise;
+// //Get the default connection
+// var db = mongoose.connection;
 
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// //Bind connection to error event (to get notification of connection errors)
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// mongoose.Promise = global.Promise; 
-// mongoose.connect('mongodb://hurrybox¨'+ process.env.MONGO_ATLAS_PSW +'@cluster0-shard-00-00-qte2y.mongodb.net:27017,cluster0-shard-00-01-qte2y.mongodb.net:27017,cluster0-shard-00-02-qte2y.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', {
-//     useMongoClient: true
-// });
+
+mongoose.connect('mongodb://hurrybox¨'+ process.env.MONGO_ATLAS_PSW +'@cluster0-shard-00-00-qte2y.mongodb.net:27017,cluster0-shard-00-01-qte2y.mongodb.net:27017,cluster0-shard-00-02-qte2y.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', {
+    useMongoClient: true
+});
+mongoose.Promise = global.Promise; 
 
 require('./config/passportUser');
 require('./config/passportDriver');
