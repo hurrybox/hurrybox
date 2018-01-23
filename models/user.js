@@ -8,7 +8,9 @@ var userSchema = new Schema({
     password: {type: String, required: true},
     firstName: {type: String},
     lastName: {type: String},
-    phone: {type: Number}
+    phone: {type: Number},
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 
 userSchema.methods.encryptPassword = function(password) {
