@@ -65,7 +65,7 @@ router.post('/forgot', function(req, res, next) {
           return done(err);
         }
         if (user) {
-          return done(null, false , {message: 'Δες το email σοu});
+          return done(null, false , {message: 'Δες το email σοu'});
         }
         if (!user) {
           return (done, false, {message: 'No user found.'});
