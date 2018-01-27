@@ -112,6 +112,9 @@ function geolocate() {
 };  
 
 
+
+
+
 //distance matrix
 
 window.addEventListener('load', function distance() {
@@ -128,7 +131,7 @@ window.addEventListener('load', function distance() {
     avoidHighways: true,
     avoidTolls: true
   }, function(response, status) {
-    if (status == 'OK') {
+    if (status === 'OK') {
       var originList = response.originAddresses;
       var destinationList = response.destinationAddresses;
       var outputDiv = document.getElementById('output');
@@ -150,3 +153,28 @@ window.addEventListener('load', function distance() {
     }
   });
 });
+
+
+function approvedCustomer() {
+  var socket = io();
+  socket.on('connect', function () {
+      console.log('Connected to server');
+    
+      socket.emit('createMessage', {
+        origin: origin,
+        destination: destination,
+        distance: distance,
+        duration: duration
+
+      
+      });
+
+      socket.on('newApproved', function (approved) {
+      console.log(approved);
+      var driverMessage = approved.approved.message;
+      var dvApproved = document.getElementById("dvApproved");
+      dvApproved.innerHTML = "";
+      dvApproved.innerHTML += driverMessage;
+      });
+    });
+  };

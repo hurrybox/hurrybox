@@ -14,6 +14,7 @@ var MongoStore = require('connect-mongo')(session);
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+var io = require('socket.io');
 var googleMapsClient = require('@google/maps').createClient({
   key:'AIzaSyDfSWT2soGD9bHWIFUobyndIa2YI1MVBmY'
 });
@@ -25,18 +26,24 @@ var drivers = require('./routes/drivers');
 
 var app = express();
 
-mongoose.connect('mongodb://127.0.0.1/hurrybox');
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-//Get the default connection
-var db = mongoose.connection;
 
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// Socket.io
+var io           = io();
+app.io           = io;
 
 
-// mongoose.connect('mongodb://heroku_4h4s1l14:tfifr036mj4183fcdkjvoi7n24@ds111648.mlab.com:11648/heroku_4h4s1l14');
-// mongoose.Promise = global.Promise; 
+// mongoose.connect('mongodb://127.0.0.1/hurrybox');
+// // Get Mongoose to use the global promise library
+// mongoose.Promise = global.Promise;
+// //Get the default connection
+// var db = mongoose.connection;
+
+// //Bind connection to error event (to get notification of connection errors)
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+mongoose.connect('mongodb://heroku_4h4s1l14:tfifr036mj4183fcdkjvoi7n24@ds111648.mlab.com:11648/heroku_4h4s1l14');
+mongoose.Promise = global.Promise; 
 
 require('./config/passportUser');
 require('./config/passportDriver');
@@ -70,6 +77,26 @@ app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
 });
+
+
+
+io.on('connection', function (socket) {
+
+  socket.on('createMessage', (message) => {
+    io.emit('newMessage', {
+      message : message
+    });
+  });
+
+  socket.on('driverApproved', (approved) => {
+    console.log(approved);
+    io.emit('newApproved', {
+      approved : approved
+    });
+  });
+  
+});
+
 
 app.use('/users', users);
 app.use('/drivers', drivers);

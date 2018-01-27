@@ -1,0 +1,21 @@
+<div class="col-md-4 offset-md-4">
+    <h1>Αλλαγή κωδικού</h1>
+    {{#if hasErrors}}
+        <div class="alert alert-danger">
+            {{#each messages }}
+                <p>{{this}}</p>
+            {{/each}}
+        </div>
+    {{/if}}
+    <form action="/drivers/reset" method="post">
+        <div class="form-group">
+            <label for="password">Νέος Κωδικός</label>
+            <input type="password" id="password" name="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Επιβεβαίωση κωδικού</label>
+            <input type="password" id="password" name="password" class="form-control">
+        </div>
+        <button type="submit">Αποθήκευση</button>
+    </form>
+</div>

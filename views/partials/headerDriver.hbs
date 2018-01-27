@@ -1,0 +1,21 @@
+    <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="/images/logo.png" width="60" alt="HurryBox"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span><i class="ion-navicon"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="probootstrap-menu">
+                <ul class="navbar-nav ml-auto">
+                    {{#if login}} 
+                        <li class="nav-item"><a class="nav-link" href="/drivers/dashboard">Διαδρομές</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/drivers/logout">Αποσύνδεση</a></li>
+                    {{else}}
+                        <li class="nav-item"><a class="nav-link" href="/drivers/signin">Συνδεση</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/drivers/signup">Εγγραφη</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END nav -->
+    
