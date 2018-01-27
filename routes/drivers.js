@@ -27,7 +27,7 @@ router.get('/', (req, res, next) => {
   res.render('drivers/index', { title: 'HurryBox', layout: 'layoutDriver.hbs',  messages: messages, hasErrors: messages.length > 0 });
 });
 
-router.post('/',, passport.authenticate('local-signup-driver', {
+router.post('/', passport.authenticate('local-signup-driver', {
   successRedirect: 'signup',
   failureRedirect: 'index',
   failureFlash: true
