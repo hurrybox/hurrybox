@@ -1,13 +1,13 @@
-<div class="container">
-      <div class="blockquote text-center">
-            <h1>Μεταφέρουμε ότι χρειάζεσαι μέσα στην πόλη άμμεσα</h1>
-      </div>
+ <section class="probootstrap-cover overflow-hidden relative"  style="background-image: url('images/bench.jpg');" data-stellar-background-ratio="0.5"  id="section-home">
+      <div class="overlay"></div>
+      <div class="container">
 
-      <div class="col-lg-6 offset-lg-3 col-md-12">
+      <div class="col-lg-6 offset-3 col-md-12">
+       <h2 class="heading font-light probootstrap-animate fadeInUp probootstrap-animated">τι χρειαζεσαι;</h2>
+      <div class="probootstrap-animate fadeInUp probootstrap-animated">
             <form action="/courier" method="post" id="formCourier" onkeypress="return event.keyCode != 13;">
             <label for="origin">Απο πού θες να παραλάβουμε;</label>
-      
-            <div class="input-group mb-3">   
+                 <div class="input-group mb-3">   
                   {{#if session.origin}}
                   <input id="origin" name="origin" value="{{session.origin.name}}" placeholder="π.χ. το όνομα του καταστήματος ή την διεύθυνση παραλαβής" type="text" class="form-control" onfocus="geolocate()"> 
                   <div class="input-group-append">
@@ -53,18 +53,16 @@
                         </div>          
                   </div>
             </div>  
-            <div class="row  justify-content-center">
-                  <div class="col-6">
+            <div class="form-group">
                         <div id="output"></div>
-                  </div>
-                  <div class="col-4">
-      
-                  </div>
             </div>
-       <button type="submit" class="btn btn-primary btn-block">Αποδοχή</button>
-      </form>
-      </div>       
+       <button type="submit" class="btn btn-primary btn-block" onclick="approvedCustomer()">Αποδοχή</button>
+       <a href="/clear"  class="btn btn-secondary btn-block">Καθαρισμός φόρμας</a>
+     </form>
 </div>
+</div>       
+</div>
+</section>
  {{!-- modal for origin start --}}
             <div class="modal fade" id="modalOrigin" role="dialog" tabindex="-1">
                   <div class="modal-dialog">
@@ -72,12 +70,8 @@
                               <form action="/origin" method="post" id="needs-validation-origin" novalidate>
                               <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Διεύθυνση Παραλαβής</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
                               </div>
-                              <button class="btn btn-primary" type="submit">Αποθήκευση</button>
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Κλείσιμο</button>
+                              <button class="btn btn-primary btn-block" type="submit">ΟΚ</button>
                               <div class="modal-body">
                                     <label for="nameOrigin">Όνομα</label>
                                     <div class="input-group">
@@ -145,12 +139,8 @@
                               <form action="/destination" method="post" id="needs-validation-destination" novalidate>
                               <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Διεύθυνση Παράδοσης</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
                               </div>
-                              <button class="btn btn-primary" type="submit" onclick="distance">Αποθήκευση</button>
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Κλείσιμο</button>
+                              <button class="btn btn-primary" type="submit" onclick="distance">ΟΚ</button>
                               <div class="modal-body">
                                     <label for="nameDestination">Όνομα</label>
                                     <div class="input-group">

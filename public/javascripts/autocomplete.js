@@ -115,14 +115,16 @@ function geolocate() {
 
 
 
-//distance matrix
+// distance matrix
 
 window.addEventListener('load', function distance() {
   var origin = document.getElementById('origin').value;
-  var destination = document.getElementById('routeDestination').value + " " + document.getElementById('street_numberDestination').value + " " + document.getElementById('localityDestination').value + " " + document.getElementById('postal_codeDestination').value;
+  var destination = document.getElementById('destination').value;
+
+  // var destination = document.getElementById('routeDestination').value + " " + document.getElementById('street_numberDestination').value + " " + document.getElementById('localityDestination').value + " " + document.getElementById('postal_codeDestination').value;
   var geocoder = new google.maps.Geocoder;
   var service = new google.maps.DistanceMatrixService;
-  console.log('ok with distance')
+  if (origin !=='' && destination !== '') {
   service.getDistanceMatrix({
     origins: [origin],
     destinations: [destination],
@@ -131,7 +133,8 @@ window.addEventListener('load', function distance() {
     avoidHighways: true,
     avoidTolls: true
   }, function(response, status) {
-    if (status === 'OK') {
+    console.log(response.rows[0].elements[0].status);
+    if (response.rows[0].elements[0].status == 'OK') {
       var originList = response.originAddresses;
       var destinationList = response.destinationAddresses;
       var outputDiv = document.getElementById('output');
@@ -142,16 +145,17 @@ window.addEventListener('load', function distance() {
         console.log(results);
           for (var j = 0; j < results.length; j++) {
             if ((results[j].distance.value-5000) < 0) {
-              outputDiv.innerHTML +=  '<label for="distance">Απόσταση</label><input class="form-control" id="disatance" name="distance" type="text" value="' + results[j].distance.text + '"><label for="duration">Διάρκεια διαδρομής</label><input class="form-control" id="duration" name="duration" type="text" value="' + results[j].duration.text +'"><label for="price">Αξία διαδρομής</label><input class="form-control" id="pice" name="price" type="text" value="4,9€">';
+              outputDiv.innerHTML +=  '<label for="distance">Απόσταση</label><input class="form-control" id="disatance" name="distance" type="text" value="' + results[j].distance.text + '" disabled><label for="duration">Διάρκεια διαδρομής</label><input class="form-control" id="duration" name="duration" type="text" value="' + results[j].duration.text +'" disabled><label for="price">Αξία διαδρομής</label><input class="form-control" id="pice" name="price" type="text" value="4,9€" disabled>';
             } else {
-              outputDiv.innerHTML +=  '<label for="distance">Απόσταση</label><input class="form-control" id="disatance" name="distance" type="text" value="' + results[j].distance.text + '"><label for="duration">Διάρκεια διαδρομής</label><input class="form-control" id="duration" name="duration" type="text" value="' + results[j].duration.text +'"><label for="price">Αξία διαδρομής</label><input class="form-control" id="pice" name="price" type="text" value="' + (((results[j].distance.value-5000)/1000)+5,9) + '€">';
+              outputDiv.innerHTML +=  '<label for="distance">Απόσταση</label><input class="form-control" id="disatance" name="distance" type="text" value="' + results[j].distance.text + '" disabled><label for="duration">Διάρκεια διαδρομής</label><input class="form-control" id="duration" name="duration" type="text" value="' + results[j].duration.text +'" disabled><label for="price">Αξία διαδρομής</label><input class="form-control" id="pice" name="price" type="text" value="' + (((results[j].distance.value-5000)/1000)+5,9) + '€" disabled>';
             }
         }
       }
     } else {
-      alert('Error was: ' + status);
+      alert('η διαδρομή που ζητήσατε δεν υπάρχει');
     }
   });
+}
 });
 
 

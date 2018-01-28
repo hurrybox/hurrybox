@@ -1,20 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><img src="/images/logo.png" width="60" alt="HurryBox"></a>
-    <ul class="navbar-nav mr-auto">
-      <div class="nav-item dropdown ">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="far fa-user-circle"></i>
-        </a>
-        <div class="dropdown-menu dropleft" aria-labelledby="navbarDropdown">
-          {{#if login}} 
-          <a class="dropdown-item" href="/users/profile">Προφίλ</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/users/logout">Αποσύνδεση</a>
-          {{else}}
-          <a class="dropdown-item" href="/users/signin">Σύνδεση</a>
-          <a class="dropdown-item" href="/users/signup">Εγγραφή</a>
-          {{/if}}
+    <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="/images/logo.png" width="60" alt="HurryBox"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span><i class="ion-navicon"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="probootstrap-menu">
+                <ul class="navbar-nav ml-auto">
+                    {{#if login}} 
+                        <li class="nav-item"><a class="nav-link" href="/users/profile">Διαδρομές</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/users/logout">Αποσύνδεση</a></li>
+                    {{else}}
+                        <li class="nav-item"><a class="nav-link" href="/users/signin">Συνδεση</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/users/signup">Εγγραφη</a></li>
+                    {{/if}}
+                </ul>
+            </div>
         </div>
-      </div>
-    </ul>
-</nav>
+    </nav>
+    <!-- END nav -->

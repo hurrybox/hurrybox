@@ -8,7 +8,9 @@ var destinationSchema = new Schema({
     route : {type : String},
     strNumber :{type : String},
     locality : {type : String},
-    postalCode : {type : String}
+    postalCode : {type : String},
+    text : { type: String},
+    output : { type: String}
 });
 
 

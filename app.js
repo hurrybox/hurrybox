@@ -15,9 +15,6 @@ var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var io = require('socket.io');
-var googleMapsClient = require('@google/maps').createClient({
-  key:'AIzaSyDfSWT2soGD9bHWIFUobyndIa2YI1MVBmY'
-});
 
 
 var index = require('./routes/index');

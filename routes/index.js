@@ -4,6 +4,10 @@ var Origin = require('../models/origin');
 var Destination = require('../models/destination');
 var Courier = require('../models/courier');
 var passport = require('passport');
+var googleMapsClient = require('@google/maps').createClient({
+  key:'AIzaSyDfSWT2soGD9bHWIFUobyndIa2YI1MVBmY',
+  Promise: Promise // 'Promise' is the native constructor.
+});
 // var matrix = require('../config/distance');
 
 /* GET home page. */
@@ -28,7 +32,6 @@ router.post ('/origin', (req, res, next) => {
         });
 
 console.log(sessionData.origin);
-
 res.redirect('/');
 });
 
@@ -48,8 +51,24 @@ sessionData.destination = new Destination ({
         text : req.body.textDestination
       });
 
+      //distance matrix στον server
+
+        googleMapsClient.distanceMatrix({
+        origins: [req.session.origin.name],
+        destinations: [sessionData.destination.name],
+        units: 'metric',
+        mode: 'driving'
+          }).asPromise()
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+
+
 console.log(sessionData.destination);
-// matrix.distance(req.session.origin, req.session.destination);
 res.redirect('/');
   });
 
@@ -93,6 +112,11 @@ router.post('/courier', isLoggedIn, (req, res, next) => {
   res.redirect('/');
 });
 
+
+router.get('/clear', (req, res, next) => {
+  req.session.destroy();
+  res.redirect('/');
+})
 
 module.exports = router;
 
