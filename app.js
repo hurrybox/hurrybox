@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressHbs = require('express-handlebars');
 var mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
@@ -29,18 +30,19 @@ var io           = io();
 app.io           = io;
 
 
-// mongoose.connect('mongodb://127.0.0.1/hurrybox');
-// // Get Mongoose to use the global promise library
-// mongoose.Promise = global.Promise;
-// //Get the default connection
-// var db = mongoose.connection;
+mongoose.connect('mongodb://127.0.0.1/hurrybox');
 
-// //Bind connection to error event (to get notification of connection errors)
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// Get Mongoose to use the global promise library
+mongoose.Promise = global.Promise;
+//Get the default connection
+var db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-mongoose.connect('mongodb://heroku_4h4s1l14:tfifr036mj4183fcdkjvoi7n24@ds111648.mlab.com:11648/heroku_4h4s1l14');
-mongoose.Promise = global.Promise; 
+// mongoose.connect('mongodb://heroku_4h4s1l14:tfifr036mj4183fcdkjvoi7n24@ds111648.mlab.com:11648/heroku_4h4s1l14');
+// mongoose.Promise = global.Promise; 
 
 require('./config/passportUser');
 require('./config/passportDriver');
@@ -104,6 +106,23 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+
+  res.status(404);
+
+  // respond with html page
+  if (req.accepts('html')) {
+    res.render('404', { url: req.url });
+    return;
+  }
+
+  // respond with json
+  if (req.accepts('json')) {
+    res.send({ error: 'Not found' });
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type('txt').send('Not found');
 });
 
 // error handler

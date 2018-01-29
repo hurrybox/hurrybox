@@ -1,21 +1,26 @@
-<div class="col-md-4 offset-md-4">
-    <h1>Αλλαγή κωδικού</h1>
-    {{#if hasErrors}}
-        <div class="alert alert-danger">
-            {{#each messages }}
-                <p>{{this}}</p>
-            {{/each}}
+<section class="probootstrap-cover overflow-hidden relative"  style="background-color: #333; height: 100vh;" data-stellar-background-ratio="0.5"  id="section-home">
+    <div class="overlay"></div>
+        <div class="container">
+            <div class="col-lg-6 offset-lg-3 col-md-12">
+                <h1>Αλλαγή κωδικού</h1>
+                {{#if hasErrors}}
+                    <div class="alert alert-danger">
+                        {{#each messages }}
+                            <p>{{this}}</p>
+                        {{/each}}
+                    </div>
+                {{/if}}
+                <form action="/drivers/reset" method="post">
+                    <div class="form-group">
+                        <label for="password">Νέος Κωδικός</label>
+                        <input type="password" id="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Επιβεβαίωση κωδικού</label>
+                        <input type="password" id="password" name="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Αποθήκευση</button>
+                </form>
+            </div>
         </div>
-    {{/if}}
-    <form action="/drivers/reset" method="post">
-        <div class="form-group">
-            <label for="password">Νέος Κωδικός</label>
-            <input type="password" id="password" name="password" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password">Επιβεβαίωση κωδικού</label>
-            <input type="password" id="password" name="password" class="form-control">
-        </div>
-        <button type="submit">Αποθήκευση</button>
-    </form>
-</div>
+</section>

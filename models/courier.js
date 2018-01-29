@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var autoIncrement = require('mongoose-auto-increment');
 var User = require('../models/user');
 var Driver = require('../models/driver');
 var Origin = require('../models/origin');
@@ -9,6 +10,7 @@ var Item = require('../models/item');
 
 var courierSchema = new Schema({
     // _id: Schema.Types.ObjectId,
+    wayBillNr : {type: Number},
     origin : {type: Schema.Types.ObjectId, ref: 'Origin'},
     destination : {type: Schema.Types.ObjectId, ref: 'Destination'},
     item : {type: Schema.Types.ObjectId, ref: 'Item'},
@@ -22,4 +24,9 @@ var courierSchema = new Schema({
     driver : {type: Schema.Types.ObjectId, ref: 'Driver'}
 });
 
+
+autoIncrement.initialize(mongoose.connection);
+courierSchema.plugin(autoIncrement.plugin, { model: 'Courier', field: 'wayBillNr', startAt: 07640000001, });
+
 module.exports = mongoose.model('Courier', courierSchema);
+

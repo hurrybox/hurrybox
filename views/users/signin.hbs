@@ -1,22 +1,27 @@
-<div class="col-md-4 offset-md-4">
-    <h1>Σύνδεση</h1>
-    {{#if hasErrors}}
-        <div class="alert alert-danger">
-            {{#each messages }}
-                <p>{{this}}</p>
-            {{/each}}
+<section class="probootstrap-cover overflow-hidden relative"  style="background-color: #333; height: 100vh;" data-stellar-background-ratio="0.5"  id="section-home">
+    <div class="overlay"></div>
+        <div class="container">
+            <div class="col-lg-6 offset-lg-3 col-md-12">
+                <h1>Σύνδεση</h1>
+                {{#if hasErrors}}
+                    <div class="alert alert-danger">
+                        {{#each messages }}
+                            <p>{{this}}</p>
+                        {{/each}}
+                    </div>
+                {{/if}}
+                <form action="/users/signin" method="post">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Κωδικός</label>
+                        <input type="password" id="password" name="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Σύνδεση</button>
+                </form>
+                <p style="text-align:center; padding-top: 20px;">Κάνε <a href="/users/signup">ΕΓΓΡΑΦΗ</a> για καινούργιο λογαριασμό.</p>
+            </div>
         </div>
-    {{/if}}
-    <form action="/users/signin" method="post">
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password">Κωδικός</label>
-            <input type="password" id="password" name="password" class="form-control">
-        </div>
-        <button type="submit">Σύνδεση</button>
-    </form>
-    <p>Κάνε <a href="/users/signup">ΕΓΓΡΑΦΗ</a> για καινούργιο λογαριασμό.</p>
-</div>
+</section>

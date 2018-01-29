@@ -40,17 +40,18 @@ router.get ('/signup', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
-  var newDriver = new Driver ({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    phone: req.body.phone,
-    vahicle: req.body.vahicle,
-    licensePlate : req.body.licensePlate
-  });
-
-  newDriver.save(function (err) {
-    if(err) return console.log('coureir error' + err);
-  });
+  Driver.findByIdAndUpdate(id, 
+    {firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      phone: req.body.phone,
+      vahicle: req.body.vahicle,
+      licensePlate : req.body.licensePlate },
+      (err, driver) => {
+        if(err) {
+          console.log(err);
+        }
+      });
+      
 
   res.redirect('/dashboard');
 });

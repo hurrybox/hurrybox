@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/origin', (req, res, next) => {
   res.redirect('/');
-})
+});
 
 router.post ('/origin', (req, res, next) => {
   var sessionData = req.session;

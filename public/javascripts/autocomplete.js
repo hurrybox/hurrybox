@@ -145,9 +145,9 @@ window.addEventListener('load', function distance() {
         console.log(results);
           for (var j = 0; j < results.length; j++) {
             if ((results[j].distance.value-5000) < 0) {
-              outputDiv.innerHTML +=  '<label for="distance">Απόσταση</label><input class="form-control" id="disatance" name="distance" type="text" value="' + results[j].distance.text + '" disabled><label for="duration">Διάρκεια διαδρομής</label><input class="form-control" id="duration" name="duration" type="text" value="' + results[j].duration.text +'" disabled><label for="price">Αξία διαδρομής</label><input class="form-control" id="pice" name="price" type="text" value="4,9€" disabled>';
+              outputDiv.innerHTML +=  '<label for="distance">Απόσταση</label><input class="form-control" id="disatance" name="distance" type="text" value="' + results[j].distance.text + '" disabled><label for="duration">Διάρκεια διαδρομής</label><input class="form-control" id="duration" name="duration" type="text" value="' + results[j].duration.text +'" disabled><label for="price">Αξία διαδρομής</label><input class="form-control" id="pice" name="price" type="text" value="5,9€" disabled>';
             } else {
-              outputDiv.innerHTML +=  '<label for="distance">Απόσταση</label><input class="form-control" id="disatance" name="distance" type="text" value="' + results[j].distance.text + '" disabled><label for="duration">Διάρκεια διαδρομής</label><input class="form-control" id="duration" name="duration" type="text" value="' + results[j].duration.text +'" disabled><label for="price">Αξία διαδρομής</label><input class="form-control" id="pice" name="price" type="text" value="' + (((results[j].distance.value-5000)/1000)+5,9) + '€" disabled>';
+              outputDiv.innerHTML +=  '<label for="distance">Απόσταση</label><input class="form-control" id="disatance" name="distance" type="text" value="' + results[j].distance.text + '" disabled><label for="duration">Διάρκεια διαδρομής</label><input class="form-control" id="duration" name="duration" type="text" value="' + results[j].duration.text +'" disabled><label for="price">Αξία διαδρομής</label><input class="form-control" id="pice" name="price" type="text" value="' + (((results[j].distance.value-5000)/2000)+5,9) + '€" disabled>';
             }
         }
       }

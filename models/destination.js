@@ -6,11 +6,10 @@ var destinationSchema = new Schema({
     name : {type : String},
     phone :{type : String},
     route : {type : String},
-    strNumber :{type : String},
+    streetNumber :{type : String},
     locality : {type : String},
     postalCode : {type : String},
-    text : { type: String},
-    output : { type: String}
+    text : { type: String}
 });
 
 

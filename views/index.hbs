@@ -38,16 +38,16 @@
             </div>   
             <div class="form-group">    
                   <div class="row  justify-content-center">
-                        <div class="col-6">
+                        <div class="col">
                               <p>Είναι αυτό που θες να στείλεις μεγαλύτερο απο ένα laptop;</p>
                         </div>
-                        <div class="col-4">   
+                        <div class="col">   
                               <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary active">
-                                          <input type="radio" name="weight" id="true" autocomplete="off" checked> Ναι
-                                    </label>
                                     <label class="btn btn-secondary">
-                                          <input type="radio" name="weight" id="false" autocomplete="off"> Όχι
+                                          <input type="radio" name="weight" id="true" autocomplete="off" value="Ναι"> Ναι
+                                    </label>
+                                    <label class="btn btn-secondary active">
+                                          <input type="radio" name="weight" id="false" autocomplete="off" Value="Οχι" checked> Όχι
                                     </label>
                               </div>
                         </div>          
@@ -93,7 +93,7 @@
                                           <div class="col">
                                                 <label for="street_numberOrigin">Αριθμός</label>
                                                 <div class="input-group">
-                                                      <input class="form-control" id="street_numberOrigin" name="street_numberOr2igin" type="text" value="{{session.origin.streetNumber}}" required>
+                                                      <input class="form-control" id="street_numberOrigin" name="street_numberOrigin" type="text" value="{{session.origin.streetNumber}}" required>
                                                       <div class="invalid-feedback">
                                                             Συμπληρωσε τον αριθμό.
                                                       </div>

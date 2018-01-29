@@ -1,21 +1,47 @@
-<div class="col-md-4 offset-md-4">
-    <h1>Εγγραφή</h1>
-    {{#if hasErrors}}
-        <div class="alert alert-danger">
-            {{#each messages }}
-                <p>{{this}}</p>
-            {{/each}}
+<section class="probootstrap-cover overflow-hidden relative"  style="background-color: #333; height: 100vh;" data-stellar-background-ratio="0.5"  id="section-home">
+    <div class="overlay"></div>
+        <div class="container">
+            <div class="col-lg-6 offset-lg-3 col-md-12">
+                <h1>Εγγραφή</h1>
+                {{#if hasErrors}}
+                    <div class="alert alert-danger">
+                        {{#each messages }}
+                            <p>{{this}}</p>
+                        {{/each}}
+                    </div>
+                {{/if}}
+                <form action="/drivers/signup" method="post">
+                    <div class="form-group">
+                        <label for="firstName">Όνομα</label>
+                        <input type="firstName" id="firstName" name="firstName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Επώνυμο</label>
+                        <input type="lastName" id="lastName" name="lastName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Τηλέφωνο</label>
+                        <input type="phone" id="phone" name="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Τηλέφωνο</label>
+                        <input type="phone" id="phone" name="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="vahicle">Μεταφωρικό μέσο</label>
+                        <select type="vahicle" id="vahicle" name="vahicle" class="form-control">
+                            <option value="">Μηχανή</option>
+                            <option value="">Αυτοκίνητο</option>
+                            <option value="">Ποδήλατο</option>
+                            <option value="">Φορτηγό</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="licensePlate">Αρ. Πινακίδας</label>
+                        <input type="licensePlate" id="licensePlate" name="licensePlate" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Εγγραφή</button>
+                </form>
+            </div>
         </div>
-    {{/if}}
-    <form action="/drivers/signup" method="post">
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password">Κωδικός</label>
-            <input type="password" id="password" name="password" class="form-control">
-        </div>
-        <button type="submit">Σύνδεση</button>
-    </form>
-</div>
+</section>

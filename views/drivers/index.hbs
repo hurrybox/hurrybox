@@ -7,6 +7,13 @@
             <p class="lead mb-5 probootstrap-animate">
           </div> 
             <div class="col-md probootstrap-animate">
+                {{#if hasErrors}}
+                    <div class="alert alert-danger">
+                {{#each messages }}
+                    <p>{{this}}</p>
+                {{/each}}
+                    </div>
+                {{/if}}
                 <form action="/drivers/index" method="post" class="probootstrap-form">
                     <div class="form-group">
                         <div class="row mb-3">
@@ -20,6 +27,7 @@
                                     <input type="password" id="password" name="password" class="form-control">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Εγγραφή</button>
+                                <p style="text-align:center; padding-top: 20px;">Αν έχεις λογαριασμό, κάνε <a href="/drivers/signin">ΣΥΝΔΕΣΗ</a>.</p>
                             </div>
                         </div>
                         <p style="color:black; text-align:center">Κάνε <a href="/drivers/signin">ΣΥΝΔΕΣΗ</a> αν έχεις κάνει εγγραφή.</p>
