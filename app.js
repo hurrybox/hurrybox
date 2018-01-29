@@ -30,19 +30,19 @@ var io           = io();
 app.io           = io;
 
 
-mongoose.connect('mongodb://127.0.0.1/hurrybox');
+// mongoose.connect('mongodb://127.0.0.1/hurrybox');
 
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-//Get the default connection
-var db = mongoose.connection;
+// // Get Mongoose to use the global promise library
+// mongoose.Promise = global.Promise;
+// //Get the default connection
+// var db = mongoose.connection;
 
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// //Bind connection to error event (to get notification of connection errors)
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-// mongoose.connect('mongodb://heroku_4h4s1l14:tfifr036mj4183fcdkjvoi7n24@ds111648.mlab.com:11648/heroku_4h4s1l14');
-// mongoose.Promise = global.Promise; 
+mongoose.connect('mongodb://heroku_4h4s1l14:tfifr036mj4183fcdkjvoi7n24@ds111648.mlab.com:11648/heroku_4h4s1l14');
+mongoose.Promise = global.Promise; 
 
 require('./config/passportUser');
 require('./config/passportDriver');
