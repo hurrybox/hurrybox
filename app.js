@@ -23,9 +23,6 @@ var users = require('./routes/users');
 var drivers = require('./routes/drivers');
 
 
-//Api routes
-const courierApi = require('./api/routes/courier');
-const usersApi = require('./api/routes/user');
 
 var app = express();
 
@@ -100,10 +97,7 @@ io.on('connection', function (socket) {
   
 });
 
-//api
 
-app.use('/api/courier', courierApi);
-app.use('/api/user', usersApi)
 
 app.use('/users', users);
 app.use('/drivers', drivers);
