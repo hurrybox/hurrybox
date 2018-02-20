@@ -29,9 +29,9 @@ router.get('/', (req, res, next) => {
 
 router.post('/', passport.authenticate('local-signup-driver', {
   successRedirect: 'signup',
-  failureRedirect: 'index',
+  failureRedirect: 'drivers/',
   failureFlash: true
-}));
+}));1
 
 
 router.get ('/signup', (req, res, next) => {
@@ -40,21 +40,24 @@ router.get ('/signup', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
-  Driver.findByIdAndUpdate(id, 
-    {firstName: req.body.firstName,
+  var id = Driver._id;
+  Driver.findByIdAndUpdate(id, {
+    firstName: req.body.firstName,
       lastName: req.body.lastName,
       phone: req.body.phone,
       vahicle: req.body.vahicle,
       licensePlate : req.body.licensePlate },
-      (err, driver) => {
-        if(err) {
-          console.log(err);
+      (error , driver) => {
+        if(error) {
+          console.log(error);
+          var messages = req.flash('error', 'Τα στοιχεία που βάλατε είναι λανθασμένα. Παρακαλούμε δοκιμάστε ξανά');
+          res.render('drivers/signup', {messages: messages, hasErrors: messages.length > 0 });
+        } else {
+          res.render('drivers/dashboard');   
         }
       });
       
-
-  res.redirect('/dashboard');
-});
+    });
 
 
 router.get ('/signin', (req, res, next) => {

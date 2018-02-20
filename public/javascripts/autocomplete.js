@@ -160,25 +160,25 @@ window.addEventListener('load', function distance() {
 
 
 function approvedCustomer() {
-  var socket = io();
-  socket.on('connect', function () {
-      console.log('Connected to server');
+  // var socket = io();
+  // socket.on('connect', function () {
+  //     console.log('Connected to server');
     
-      socket.emit('createMessage', {
-        origin: origin,
-        destination: destination,
-        distance: distance,
-        duration: duration
+  //     socket.emit('createMessage', {
+  //       origin: origin,
+  //       destination: destination,
+  //       distance: distance,
+  //       duration: duration
 
       
-      });
+  //     });
 
-      socket.on('newApproved', function (approved) {
-      console.log(approved);
-      var driverMessage = approved.approved.message;
-      var dvApproved = document.getElementById("dvApproved");
-      dvApproved.innerHTML = "";
-      dvApproved.innerHTML += driverMessage;
-      });
-    });
+  //     socket.on('newApproved', function (approved) {
+  //     console.log(approved);
+  //     var driverMessage = approved.approved.message;
+  //     var dvApproved = document.getElementById("dvApproved");
+  //     dvApproved.innerHTML = "";
+  //     dvApproved.innerHTML += driverMessage;
+  //     });
+  //   });
   };

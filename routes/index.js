@@ -100,14 +100,37 @@ router.post('/courier', isLoggedIn, (req, res, next) => {
     status : '1',
     duration : req.body.duration,
     distance : req.body.distance,
-    // user : user._id,
+    user : session.user._id,
     // driver : driver._id,
   });
 
   req.session.courier = courier;
   courier.save(function (err) {
+    // req.session.destroy();
     if(err) return console.log('coureir error' + err);
   });
+
+  var socket = io();
+  socket.on('connect', function () {
+      console.log('Connected to server');
+    
+      socket.emit('createMessage', {
+        origin: session.courier.origin,
+        destination: destination,
+        distance: distance,
+        duration: duration
+
+      
+      });
+
+      socket.on('newApproved', function (approved) {
+      console.log(approved);
+      var driverMessage = approved.approved.message;
+      var dvApproved = document.getElementById("dvApproved");
+      dvApproved.innerHTML = "";
+      dvApproved.innerHTML += driverMessage;
+      });
+    });
 
   res.redirect('/');
 });

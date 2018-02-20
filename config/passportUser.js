@@ -69,10 +69,10 @@ passport.use('local-signin', new LocalStrategy({
             return done(err);
         }
         if (!user) {
-            return done(null, false, {message: 'No user found.'});
+            return done(null, false, {message: 'Δεν υπάρχει ο χρήστης.'});
         }
         if (!user.validPassword(password)) {
-            return done(null, false, {message: 'Wrong password.'});
+            return done(null, false, {message: 'Λάθος κωδικός'});
         }
         return done(null, user);
     });

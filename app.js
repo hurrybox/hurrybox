@@ -22,6 +22,11 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var drivers = require('./routes/drivers');
 
+
+//Api routes
+const courierApi = require('./api/routes/courier');
+const usersApi = require('./api/routes/user');
+
 var app = express();
 
 
@@ -30,7 +35,7 @@ var io           = io();
 app.io           = io;
 
 
-// mongoose.connect('mongodb://127.0.0.1/hurrybox');
+// mongoose.connect('mongodb://127.0.0.1/hurrybox', { useMongoClient: true });
 
 // // Get Mongoose to use the global promise library
 // mongoose.Promise = global.Promise;
@@ -46,7 +51,6 @@ mongoose.Promise = global.Promise;
 
 require('./config/passportUser');
 require('./config/passportDriver');
-// require('./config/distance');
 
 
 // view engine setup
@@ -96,10 +100,15 @@ io.on('connection', function (socket) {
   
 });
 
+//api
+
+app.use('/api/courier', courierApi);
+app.use('/api/user', usersApi)
 
 app.use('/users', users);
 app.use('/drivers', drivers);
 app.use('/', index);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -108,21 +117,6 @@ app.use(function(req, res, next) {
   next(err);
 
   res.status(404);
-
-  // respond with html page
-  if (req.accepts('html')) {
-    res.render('404', { url: req.url });
-    return;
-  }
-
-  // respond with json
-  if (req.accepts('json')) {
-    res.send({ error: 'Not found' });
-    return;
-  }
-
-  // default to plain-text. send()
-  res.type('txt').send('Not found');
 });
 
 // error handler
@@ -134,6 +128,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  // res.json({
+  //   err : {
+  //     message: err.message
+  //   }
+  //   });
 });
 
 module.exports = app;

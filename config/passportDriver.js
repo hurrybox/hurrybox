@@ -1,5 +1,5 @@
 var passport = require('passport');
-var User = require('../models/driver');
+var Driver = require('../models/driver');
 var mongoose = require('mongoose');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -9,8 +9,8 @@ passport.serializeUser((driver, done) => {
 });
 
 passport.deserializeUser(function(id, done) {
-    driver.findById(id, function(err, user) {
-        done(err, Driver);
+    driver.findById(id, function(err, driver) {
+        done(err, driver);
     });
 });
 
@@ -33,13 +33,13 @@ passport.use('local-signup-driver', new LocalStrategy ({
         if (err) {
             return done(err);
         }
-        if (WSAEINVALIDPROVIDER) {
+        if (driver) {
             return done(null, false , {message: 'email taken'});
         }
         var newDriver = new Driver();
         newDriver._id = mongoose.Types.ObjectId();
         newDriver.email = email;
-        newDriver.password = newUser.encryptPassword(password);
+        newDriver.password = newDriver.encryptPassword(password);
         newDriver.save(function(err, result) {
             if (err) {
                 return done(err);
